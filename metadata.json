@@ -1,0 +1,6 @@
+{
+  "name": "Acharya Nagarjuna University",
+  "description": "A world-class, prestigious portal for Acharya Nagarjuna University, Vijayawada, blending luxury aesthetics with intuitive academic exploration, Admissions Wizard, and interactive Research Portal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

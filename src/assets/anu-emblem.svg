@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Acharya Nagarjuna University emblem">
+  <rect width="128" height="128" rx="18" fill="#002147"/>
+  <circle cx="64" cy="64" r="48" fill="#f8f7f3" stroke="#c5a059" stroke-width="5"/>
+  <circle cx="64" cy="64" r="36" fill="none" stroke="#c5a059" stroke-width="2" stroke-dasharray="3 5"/>
+  <path d="M34 77c12-4 20-13 24-28 1-5 11-5 12 0 4 15 12 24 24 28-13 7-47 7-60 0Z" fill="#002147"/>
+  <path d="M43 82c12 8 30 8 42 0" fill="none" stroke="#c5a059" stroke-width="4" stroke-linecap="round"/>
+  <path d="M64 30l7 14 15 2-11 11 3 15-14-7-14 7 3-15-11-11 15-2 7-14Z" fill="#c5a059"/>
+  <text x="64" y="108" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="700" fill="#002147">ANU</text>
+</svg>

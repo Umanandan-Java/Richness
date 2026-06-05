@@ -1,0 +1,509 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-anu-blue: #002147;
+  --color-anu-blue-dark: #001229;
+  --color-anu-blue-light: #0d386c;
+  --color-anu-gold: #C5A059;
+  --color-anu-gold-dark: #aa8540;
+  --color-anu-gold-light: #E2CE9C;
+  --color-bg-cream: #F8F7F3;
+  --color-ink: #1A1A1A;
+  --color-ink-muted: rgba(26, 26, 26, 0.7);
+  --color-navy: var(--color-anu-blue);
+  --color-navy-dark: var(--color-anu-blue-dark);
+  --color-navy-light: var(--color-anu-blue-light);
+  --color-gold: var(--color-anu-gold);
+  --color-gold-dark: var(--color-anu-gold-dark);
+  --color-gold-light: var(--color-anu-gold-light);
+  --color-charcoal: var(--color-ink);
+  --color-cream: var(--color-bg-cream);
+  
+  --font-serif: "Playfair Display", Playfair, Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --essential-h: 1.75rem;
+  --nav-h: 5.5rem;
+  --nav-bottom-gap: 0rem;
+  --breadcrumb-h: 2.25rem;
+  --app-zoom: 1.25;
+  --scaled-header-h: 9.0625rem;
+}
+
+#app-root {
+  --cur-nav-h: var(--nav-h);
+  --cur-header-h: calc(var(--essential-h) + var(--cur-nav-h));
+  --cur-breadcrumb-top: var(--cur-header-h);
+  --cur-page-sticky-top: calc(var(--cur-breadcrumb-top) + var(--breadcrumb-h));
+}
+
+:root {
+  /* Also expose header/breadcrumb offsets globally so portaled elements
+     mounted on document.body can use the same CSS variables. */
+  --cur-nav-h: var(--nav-h);
+  --cur-header-h: calc(var(--essential-h) + var(--cur-nav-h));
+  --cur-breadcrumb-top: var(--cur-header-h);
+  --cur-page-sticky-top: calc(var(--cur-breadcrumb-top) + var(--breadcrumb-h));
+  --portal-line: color-mix(in srgb, var(--color-ink) 12%, transparent);
+  --portal-muted: color-mix(in srgb, var(--color-ink) 62%, white);
+}
+
+.portal-page {
+  --portal-surface: #fbfaf7;
+  --portal-line: color-mix(in srgb, var(--color-ink) 12%, transparent);
+  --portal-muted: color-mix(in srgb, var(--color-ink) 62%, white);
+  background: var(--portal-surface);
+  color: var(--color-ink);
+  font-size: 0.875rem;
+}
+
+.portal-page {
+  padding-top: calc(var(--cur-header-h) + var(--breadcrumb-h));
+}
+
+.portal-page .bg-gray-50 {
+  background-color: var(--portal-surface);
+}
+
+.portal-page .bg-white {
+  background-color: rgba(255, 255, 255, 0.78);
+}
+
+.portal-page h1,
+.portal-page h2,
+.portal-page h3 {
+  letter-spacing: 0;
+}
+
+body > header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: auto !important;
+  z-index: 9999 !important;
+  width: 80% !important;
+  transform: scale(var(--app-zoom)) !important;
+  transform-origin: top left !important;
+}
+
+.portal-breadcrumb-bar {
+  position: fixed !important;
+  top: var(--scaled-header-h) !important;
+  left: 0 !important;
+  right: auto !important;
+  z-index: 9998 !important;
+  border-bottom: 1px solid var(--portal-line);
+  background: rgba(248, 247, 243, 0.98);
+  backdrop-filter: blur(14px);
+  width: 80vw;
+  margin-left: 0;
+  transform: scale(var(--app-zoom)) !important;
+  transform-origin: top left !important;
+}
+
+.portal-breadcrumb-inner {
+  display: flex;
+  min-height: 2.25rem;
+  max-width: 70rem;
+  align-items: center;
+  gap: 0.45rem;
+  margin-inline: auto;
+  padding: 0 1rem;
+  color: var(--portal-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.portal-history-btn {
+  display: inline-flex;
+  height: 1.45rem;
+  width: 1.45rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--portal-line);
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--color-anu-blue);
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.portal-history-btn:hover {
+  border-color: color-mix(in srgb, var(--color-anu-gold) 55%, transparent);
+  background: white;
+}
+
+.portal-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--color-anu-blue);
+  transition: color 150ms ease;
+}
+
+.portal-home-link:hover,
+.portal-current-page {
+  color: var(--color-anu-gold-dark);
+}
+
+.portal-current-page {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portal-page section#breadcrumb {
+  display: none;
+}
+
+.portal-page section[id="hero"],
+.portal-page section[id$="header"],
+.portal-page #research-header,
+.portal-page #placements-header,
+.portal-page #international-header,
+.portal-page #alumni-header,
+.portal-page #contact-header,
+.portal-page #news-header {
+  background: linear-gradient(180deg, #fffdf8 0%, var(--portal-surface) 100%) !important;
+  color: var(--color-ink) !important;
+  border-block: 1px solid var(--portal-line);
+  padding-top: 2.15rem !important;
+  padding-bottom: 2.15rem !important;
+}
+
+.portal-page section[id="hero"] *,
+.portal-page section[id$="header"] *,
+.portal-page #research-header *,
+.portal-page #placements-header *,
+.portal-page #international-header *,
+.portal-page #alumni-header *,
+.portal-page #contact-header *,
+.portal-page #news-header * {
+  color: inherit;
+}
+
+.portal-page section[id="hero"] p[class*="text-gold"],
+.portal-page section[id$="header"] span[class*="text-gold"],
+.portal-page section[id$="header"] div[class*="text-gold"],
+.portal-page [class*="text-gold"] {
+  color: var(--color-anu-gold-dark) !important;
+}
+
+.portal-page h1,
+.portal-page .text-5xl,
+.portal-page .text-6xl,
+.portal-page .text-7xl {
+  font-size: clamp(1.65rem, 2.4vw, 2.35rem) !important;
+  line-height: 1.16 !important;
+}
+
+.portal-page h2,
+.portal-page .text-4xl {
+  font-size: clamp(1.25rem, 1.55vw, 1.7rem) !important;
+  line-height: 1.22 !important;
+}
+
+.portal-page h3,
+.portal-page .text-3xl {
+  font-size: clamp(1rem, 1.1vw, 1.25rem) !important;
+  line-height: 1.28 !important;
+}
+
+.portal-page .text-2xl {
+  font-size: 1.08rem !important;
+  line-height: 1.35 !important;
+}
+
+.portal-page p,
+.portal-page li,
+.portal-page td,
+.portal-page input,
+.portal-page textarea,
+.portal-page select {
+  font-size: 0.78rem !important;
+  line-height: 1.58 !important;
+}
+
+.portal-page .container,
+.portal-page .max-w-7xl {
+  max-width: 70rem !important;
+}
+
+.portal-page .py-24,
+.portal-page .py-20,
+.portal-page .py-16,
+.portal-page .py-14,
+.portal-page .py-12,
+.portal-page .py-10 {
+  padding-top: 1.75rem !important;
+  padding-bottom: 1.75rem !important;
+}
+
+.portal-page .p-8,
+.portal-page .p-10,
+.portal-page .p-12 {
+  padding: 1.25rem !important;
+}
+
+.portal-page .p-6,
+.portal-page .p-5 {
+  padding: 1rem !important;
+}
+
+.portal-page .gap-16,
+.portal-page .gap-12,
+.portal-page .gap-10,
+.portal-page .gap-8 {
+  gap: 1.25rem !important;
+}
+
+.portal-page .mb-16,
+.portal-page .mb-14,
+.portal-page .mb-12,
+.portal-page .mb-10,
+.portal-page .mb-8 {
+  margin-bottom: 1.25rem !important;
+}
+
+.portal-page .mt-16,
+.portal-page .mt-12,
+.portal-page .mt-10,
+.portal-page .mt-8 {
+  margin-top: 1.25rem !important;
+}
+
+.portal-page .rounded-full {
+  border-radius: 999px;
+}
+
+.portal-page :is(.rounded-lg, .rounded-md) {
+  border-radius: 0.25rem !important;
+}
+
+.portal-page [class*="shadow"] {
+  box-shadow: 0 10px 28px rgba(0, 33, 71, 0.06) !important;
+}
+
+.portal-page [class*="border-gray"],
+.portal-page [class*="border-white"] {
+  border-color: var(--portal-line) !important;
+}
+
+.portal-page :is(.bg-navy, .bg-anu-blue) {
+  background-color: var(--color-anu-blue) !important;
+}
+
+.portal-page :is(.bg-gold, .bg-anu-gold) {
+  background-color: color-mix(in srgb, var(--color-anu-gold) 82%, white) !important;
+}
+
+.portal-page [class*="bg-blue-"],
+.portal-page [class*="bg-purple-"],
+.portal-page [class*="bg-green-"],
+.portal-page [class*="bg-pink-"],
+.portal-page [class*="bg-orange-"],
+.portal-page [class*="bg-teal-"],
+.portal-page [class*="bg-lime-"],
+.portal-page [class*="bg-yellow-"],
+.portal-page [class*="bg-amber-"] {
+  background-color: color-mix(in srgb, var(--color-anu-gold) 11%, white) !important;
+}
+
+.portal-page [class*="bg-red-"] {
+  background-color: #fff1f0 !important;
+}
+
+.portal-page [class*="text-blue-"],
+.portal-page [class*="text-purple-"],
+.portal-page [class*="text-green-"],
+.portal-page [class*="text-pink-"],
+.portal-page [class*="text-orange-"],
+.portal-page [class*="text-teal-"],
+.portal-page [class*="text-lime-"],
+.portal-page [class*="text-yellow-"],
+.portal-page [class*="text-amber-"] {
+  color: var(--color-anu-blue-light) !important;
+}
+
+.portal-page [class*="text-red-"] {
+  color: #9f2f28 !important;
+}
+
+.portal-page button,
+.portal-page a {
+  text-underline-offset: 3px;
+}
+
+.portal-page button[class*="px-6"],
+.portal-page a[class*="px-6"],
+.portal-page button[class*="px-8"],
+.portal-page a[class*="px-8"] {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.portal-page button[class*="py-4"],
+.portal-page a[class*="py-4"],
+.portal-page button[class*="py-3"],
+.portal-page a[class*="py-3"] {
+  padding-top: 0.55rem !important;
+  padding-bottom: 0.55rem !important;
+}
+
+.portal-page .sticky.top-0,
+main .sticky.top-0,
+main .sticky[class*="top-0"] {
+  top: var(--cur-page-sticky-top) !important;
+  z-index: 70;
+  transition: top 300ms ease;
+}
+
+body > header.fixed {
+  z-index: 100 !important;
+}
+
+.portal-page table th {
+  font-size: 0.65rem !important;
+}
+
+@media (max-width: 768px) {
+  .portal-page table {
+    min-width: 42rem;
+  }
+}
+
+body {
+  background-color: var(--color-bg-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  text-rendering: geometricPrecision;
+  scrollbar-gutter: stable;
+}
+
+.nav-essential-links {
+  scrollbar-width: none;
+}
+
+.nav-essential-links::-webkit-scrollbar {
+  display: none;
+}
+
+/* Theme-aligned text selection */
+::selection {
+  background: color-mix(in srgb, var(--color-anu-gold) 55%, white);
+  color: var(--color-anu-blue-dark);
+}
+
+::-moz-selection {
+  background: color-mix(in srgb, var(--color-anu-gold) 55%, white);
+  color: var(--color-anu-blue-dark);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#root {
+  width: 80%;
+  min-height: 80vh;
+  margin-inline: auto;
+  transform: scale(var(--app-zoom));
+  transform-origin: top center;
+}
+
+/* Premium motion polish */
+@keyframes anu-section-glide {
+  0% {
+    transform: translateY(18px);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes anu-card-sheen {
+  0% {
+    transform: translateX(-160%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+.anu-motion-section {
+  animation: anu-section-glide 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anu-lux-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.anu-lux-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.22) 50%, transparent 70%);
+  transform: translateX(-160%);
+  pointer-events: none;
+}
+
+.anu-lux-card:hover::after {
+  animation: anu-card-sheen 0.9s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .anu-motion-section,
+  .anu-lux-card:hover::after {
+    animation: none !important;
+  }
+}
+
+/* Custom gorgeous scrollbar for premium look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F7F3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C5A059;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #002147;
+}
+
+/* Custom high-contrast layout classes for Luxury Theme Recipe 12 */
+.oval-frame {
+  border-radius: 180px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.oval-frame:hover {
+  transform: scale(1.02);
+}
+
+@keyframes anu-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
