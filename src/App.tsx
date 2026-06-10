@@ -20,6 +20,7 @@ import Testimonials from "./components/Testimonials";
 import JubileeSection from "./components/JubileeSection";
 import Footer from "./components/Footer";
 import MotionReveal from "./components/MotionReveal";
+import { AcademicProgramsSection, AdmissionsSnapshotSection, NewsEventsSection } from "./components/HomeSections";
 import { Award, Landmark, MapPin, X, GraduationCap, Compass, Volume2, Sparkles, Play, ChevronLeft, ChevronRight, Home as HomeIcon } from "lucide-react";
 import { navigateTo } from "./components/PortalLink";
 import About from "./pages/About";
@@ -182,7 +183,10 @@ export default function App() {
                 <UniversityOverview />
               </MotionReveal>
 
-             
+              {/* College-wise academic programs using the six provided college details */}
+              <MotionReveal delay={0.09}>
+                <AcademicProgramsSection />
+              </MotionReveal>
 
               {/* Research highlights and scholarly frontiers ("Research thing") */}
               <MotionReveal delay={0.1}>
@@ -194,6 +198,11 @@ export default function App() {
                 <CareerExcellence />
               </MotionReveal>
 
+              {/* Campus updates and upcoming academic events */}
+              <MotionReveal delay={0.13}>
+                <NewsEventsSection />
+              </MotionReveal>
+
               {/* Student and alumni credibility stories */}
               <MotionReveal delay={0.14}>
                 <Testimonials />
@@ -202,6 +211,11 @@ export default function App() {
               {/* Campus facilities and lifestyle guide ("life at anu") */}
               <MotionReveal delay={0.16}>
                 <VirtualCampus />
+              </MotionReveal>
+
+              {/* Admissions snapshot before the final conversion CTA */}
+              <MotionReveal delay={0.17}>
+                <AdmissionsSnapshotSection onApply={() => setActiveTab("admissions")} />
               </MotionReveal>
 
               {/* Direct Admission Promo Call To Action section */}
