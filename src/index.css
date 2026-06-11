@@ -26,15 +26,16 @@
 
   --essential-h: 1.75rem;
   --nav-h: 5.5rem;
+  --acc-strip-h: 0rem;
   --nav-bottom-gap: 0rem;
   --breadcrumb-h: 2.25rem;
   --app-zoom: 1.25;
-  --scaled-header-h: 9.0625rem;
+  --scaled-header-h: calc((var(--essential-h) + var(--nav-h) + var(--acc-strip-h)) * var(--app-zoom));
 }
 
 #app-root {
   --cur-nav-h: var(--nav-h);
-  --cur-header-h: calc(var(--essential-h) + var(--cur-nav-h));
+  --cur-header-h: calc(var(--essential-h) + var(--cur-nav-h) + var(--acc-strip-h));
   --cur-breadcrumb-top: var(--cur-header-h);
   --cur-page-sticky-top: calc(var(--cur-breadcrumb-top) + var(--breadcrumb-h));
 }
@@ -43,7 +44,7 @@
   /* Also expose header/breadcrumb offsets globally so portaled elements
      mounted on document.body can use the same CSS variables. */
   --cur-nav-h: var(--nav-h);
-  --cur-header-h: calc(var(--essential-h) + var(--cur-nav-h));
+  --cur-header-h: calc(var(--essential-h) + var(--cur-nav-h) + var(--acc-strip-h));
   --cur-breadcrumb-top: var(--cur-header-h);
   --cur-page-sticky-top: calc(var(--cur-breadcrumb-top) + var(--breadcrumb-h));
   --portal-line: color-mix(in srgb, var(--color-ink) 12%, transparent);

@@ -39,6 +39,8 @@ import Placements from "./pages/Placements";
 import Programs from "./pages/Programs";
 import Research from "./pages/Research";
 import Sports from "./pages/Sports";
+import { IQACPage, IncubatorsPage, ELCElectoralPage, SSRPage, NIRFPage } from "./components/AccreditationPages";
+
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>("hero");
@@ -260,6 +262,66 @@ export default function App() {
               transition={{ duration: 0.45 }}
             >
               <CollegesSection onTriggerAdmissions={() => setActiveTab("admissions")} />
+            </motion.div>
+          )}
+
+          {activeTab === "iqac" && (
+            <motion.div
+              key="iqac-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.45 }}
+            >
+              <IQACPage onBackToHome={() => setActiveTab("hero")} />
+            </motion.div>
+          )}
+
+          {activeTab === "incubators" && (
+            <motion.div
+              key="incubators-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.45 }}
+            >
+              <IncubatorsPage onBackToHome={() => setActiveTab("hero")} />
+            </motion.div>
+          )}
+
+          {activeTab === "elc" && (
+            <motion.div
+              key="elc-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.45 }}
+            >
+              <ELCElectoralPage onBackToHome={() => setActiveTab("hero")} />
+            </motion.div>
+          )}
+
+          {activeTab === "ssr" && (
+            <motion.div
+              key="ssr-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.45 }}
+            >
+              <SSRPage onBackToHome={() => setActiveTab("hero")} />
+            </motion.div>
+          )}
+
+          {activeTab === "nirf" && (
+            <motion.div
+              key="nirf-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.45 }}
+            >
+              <NIRFPage onBackToHome={() => setActiveTab("hero")} />
             </motion.div>
           )}
 
